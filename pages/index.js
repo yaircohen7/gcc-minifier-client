@@ -1,8 +1,32 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import CssBaseline from '@material-ui/core/CssBaseline';
 import styles from '../styles/Home.module.css'
+import Container from '@material-ui/core/Container';
+import { makeStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+import Link from 'next/link';
+import ListItem from "@material-ui/core/ListItem";
+import Typography from "@material-ui/core/Typography";
+import ListItemText from "@material-ui/core/ListItemText";
+import SettingsIcon from '@material-ui/icons/Settings';
+import React from "react";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    // maxWidth: 360,
+    backgroundColor: theme.palette.background.paper,
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    fontWeight: theme.typography.fontWeightRegular,
+  },
+}));
 
 export default function Home() {
+  const classes = useStyles();
+  const files = [1,2,3,4,5];
   return (
     <div className={styles.container}>
       <Head>
@@ -12,44 +36,31 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        <React.Fragment>
+          <CssBaseline />
+          <Container maxWidth="xl">
+            <List className={classes.root}>
+                {files.map((file) => {
+                  // return <>{file}</>;
+                  return (
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+                           <>
+                             <ListItem>
+                             <Typography className={classes.heading}>{file}.</Typography>
+                             <ListItemText primary="Photos" secondary="Jan 9, 2014"/>
+                               <Link href={`/posts/${file}`} key={file}>
+                                 <SettingsIcon color="action" />
+                               </Link>
+                             </ListItem>
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+                           </>
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
+                  )
 
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+                })}
+            </List>
+          </Container>
+        </React.Fragment>
       </main>
 
       <footer className={styles.footer}>
