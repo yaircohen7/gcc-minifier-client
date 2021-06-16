@@ -1,0 +1,6 @@
+.wrapper {
+    overflow-y: scroll;
+    height: 500px;
+    background-color: #031a2d !important;
+    color:white;
+}
