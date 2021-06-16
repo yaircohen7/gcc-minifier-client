@@ -14,3 +14,21 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.post-wrapper {
+  padding-top: 50px;
+  width: 100%;
+}
+
+.box-wrapper {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-direction: row;
+}
+.navigation {
+  position: fixed;
+  top:10px;
+  right: 0;
+  left: 0;
+}

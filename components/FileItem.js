@@ -19,26 +19,18 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 const FileItem = (props) => {
-    // const classes = useStyles();
-    console.log('FileItem',props);
-    // const [originalCode,set_originalCode] = useState(props.originalCode);
-    // const [minifiedCode,set_minifiedCode] = useState(props.minifiedCode);
-    // useEffect(() => {
-    //     set_originalCode(props.originalCode);
-    //     set_minifiedCode(props.minifiedCode);
-    // },[props]);
 
     return (
-        <Container maxWidth="xxl">
-            <Box display="flex" justifyContent="center" flexDirection="row" className={styles.wrapper}>
+        <Container >
+            <Box className={styles.wrapper}>
 
-                   <div>
-                       <div>Original code</div>
+                   <div className={styles.codeWrapper}>
+                       <div>Original code  - {props.originalTitle}</div>
                        <CodeEditor  code={props.originalCode} />
                    </div>
 
-                    <div>
-                        <div>Minified code</div>
+                    <div className={styles.codeWrapper}>
+                        <div>Minified code - {props.minifiedTitle}</div>
                         <CodeEditor  code={props.minifiedCode} />
                     </div>
 

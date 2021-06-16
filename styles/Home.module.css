@@ -15,6 +15,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width:100%;
 }
 
 .footer {
@@ -118,4 +119,29 @@
     width: 100%;
     flex-direction: column;
   }
+}
+.wrapper {
+  overflow-y: scroll;
+  height: 500px;
+  background-color: #031a2d !important;
+  color:white;
+}
+.fileBoxContainer {
+  width: 800px;
+  max-width: 80%;
+}
+
+.archivesLink {
+  display: block;
+  text-align: center;
+  padding: 10px;
+  color: #2484FF;
+  font-weight: bold;
+  font-size: 14px;
+  cursor:pointer;
+}
+
+.archivesLink  span {
+  text-decoration: underline;
+
 }
