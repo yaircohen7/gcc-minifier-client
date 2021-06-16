@@ -1,25 +1,15 @@
-import React, { useState, useEffect,createRef } from "react";
+import React, { useState } from "react";
 import Router from 'next/router';
-import UploadService from "../api/FileUpload";
-import LinearProgress from '@material-ui/core/LinearProgress';
-import Dropzone from 'react-dropzone-uploader'
+import Dropzone from 'react-dropzone-uploader';
 import 'react-dropzone-uploader/dist/styles.css'
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { toast, ToastContainer } from 'react-nextjs-toast';
-
-
-
-import Paper from '@material-ui/core/Paper';
-
-import RootRef from '@material-ui/core/RootRef'
 import Container from "@material-ui/core/Container";
 
 const UploadFiles = () => {
 
     const [selectedFiles, setSelectedFiles] = useState(undefined);
-    const [errorMsg,set_errorMsg] = useState(false)
-    const [token,setToken] = useState(false);
-
+    const [errorMsg,set_errorMsg] = useState(false);
 
     const selectFile = (event) => {
         setSelectedFiles(event.target.files);
@@ -66,6 +56,7 @@ const UploadFiles = () => {
                     multiple={false}
                     canCancel={false}
                     onSubmit={selectFile}
+                    accept="text/javascript,application/javascript,application/zip"
                     inputContent="Drop a JS file or ZIP archive"
                     styles={{
                         dropzone: { width: '80%', height: 200, overflow:'hidden' },

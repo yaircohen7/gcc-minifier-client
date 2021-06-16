@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link';
 import { useRouter } from 'next/router'
-import React, {useState, useRef, useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -16,7 +16,6 @@ import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import RestoreIcon from "@material-ui/icons/Restore";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import styles from '../../styles/Archives.module.css';
 
 const useStyles = makeStyles((theme) => ({
     root: {
