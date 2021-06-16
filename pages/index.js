@@ -1,21 +1,18 @@
 import Head from 'next/head'
-import Image from 'next/image'
+import Link from 'next/link';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import styles from '../styles/Home.module.css'
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import Link from 'next/link';
-import ListItem from "@material-ui/core/ListItem";
-import Typography from "@material-ui/core/Typography";
-import ListItemText from "@material-ui/core/ListItemText";
-import SettingsIcon from '@material-ui/icons/Settings';
-import React from "react";
+import React, {useState,useRef} from "react";
+import FileUpload from "../components/FileUpload";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-    // maxWidth: 360,
+    minWidth: 360,
+    maxHeight:300,
     backgroundColor: theme.palette.background.paper,
   },
   heading: {
@@ -26,7 +23,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Home() {
   const classes = useStyles();
-  const files = [1,2,3,4,5];
+  const styles = {  width: 600, color: 'black', padding: 20, margin:'0 auto' };
+
+
+
   return (
     <div className={styles.container}>
       <Head>
@@ -39,28 +39,12 @@ export default function Home() {
         <React.Fragment>
           <CssBaseline />
           <Container maxWidth="xl">
-            <List className={classes.root}>
-                {files.map((file) => {
-                  // return <>{file}</>;
-                  return (
-
-                           <>
-                             <ListItem>
-                             <Typography className={classes.heading}>{file}.</Typography>
-                             <ListItemText primary="Photos" secondary="Jan 9, 2014"/>
-                               <Link href={`/posts/${file}`} key={file}>
-                                 <SettingsIcon color="action" />
-                               </Link>
-                             </ListItem>
-
-                           </>
-
-                  )
-
-                })}
-            </List>
+           <div style={styles}>
+              <FileUpload  />
+           </div>
           </Container>
         </React.Fragment>
+          <Link href="/archives">Or check our archives!</Link>
       </main>
 
       <footer className={styles.footer}>
@@ -69,10 +53,7 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
+         Made by YC
         </a>
       </footer>
     </div>
