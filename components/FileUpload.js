@@ -27,7 +27,7 @@ const UploadFiles = () => {
     const getUploadParams = ({ file, meta }) => {
         const body = new FormData()
         body.append('file', file)
-        return { url: 'http://localhost:3030/upload', body }
+        return { url: process.env.baseUrl + '/upload', body }
     }
     const handleChangeStatus = ({meta, remove, xhr}, status) => {
         switch (status) {

@@ -1,7 +1,8 @@
 import axios from "axios";
 
 export default axios.create({
-    baseURL: "http://localhost:3030",
+    // setup at next.config.js
+    baseURL: process.env.baseUrl,
     headers: {
         "Content-type": "application/json"
     }
