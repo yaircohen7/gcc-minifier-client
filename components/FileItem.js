@@ -26,7 +26,7 @@ const FileItem = (props) => {
 
                    <div className={styles.codeWrapper}>
                        <div>Original code  - {props.originalTitle}</div>
-                       <CodeEditor  code={props.originalCode} />
+                       <CodeEditor  code={props.originalCode} updateCode={props.updateCode}/>
                    </div>
 
                     <div className={styles.codeWrapper}>

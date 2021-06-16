@@ -30,7 +30,13 @@ const CodeEditor = (props) => {
        <Container>
            <Editor
                value={code}
-               onValueChange={(code) => setCode(code)}
+               onValueChange={(code) => {
+                   setCode(code);
+                   if(props.updateCode){
+                       props.updateCode(code);
+                   }
+               }
+               }
                highlight={(code) => highlight(code, languages.js)}
                padding={10}
 

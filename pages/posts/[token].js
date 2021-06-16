@@ -48,7 +48,49 @@ const Post = () => {
 
 
     }, [query,token]);
+    const download = ()=>{
+        [{data:originalCode,title:originalTitle},{data:minifiedCode,title:minifiedTitle}].forEach((job)=>{
+            let blob = new Blob([job.data], { type: 'application/javascript' });
+            let a = document.createElement('a');
+            a.download = job.title;
+            a.href = URL.createObjectURL(blob);
+            a.dataset.downloadurl = ['application/javascript', a.download, a.href].join(':');
+            a.style.display = "none";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            setTimeout(function() { URL.revokeObjectURL(a.href); }, 1500);
+        });
+    };
+    const update = () => {
+        console.log('org',originalCode);
+        const formData = new FormData();
+        const file = new File([originalCode], originalTitle, {
+            type: 'application/javascript',
+        });
+        formData.append('file', file);
+        const axiosObject = {
+            url: `/${token}`,
+            method: "PUT",
+            data:formData
+        };
+        http(axiosObject)
+            .then(response => {
+                console.log('response',response);
+                try{
+                    set_originalCode(response.data.content.files[0].content);
+                    set_minifiedCode(response.data.content.files[1].content);
+                    set_originalTitle(response.data.content.files[0].name);
+                    set_minifiedTitle(response.data.content.files[1].name);
+                }catch (e){
 
+                }
+            })
+            .catch(error => {
+                console.log(error.response);
+
+            });
+    };
     return (
         <div className={styles.container}>
             <Head>
@@ -58,11 +100,18 @@ const Post = () => {
             </Head>
 
                <div className={styles.main}>
-                   <Button variant="contained" color="primary" onClick={() => router.back()}>
-                       return
-                   </Button>
-                   <p>Post:</p>
-                   <FileItem minifiedCode={minifiedCode} originalCode={originalCode} originalTitle={originalTitle} minifiedTitle={minifiedTitle}/>
+                   <div className={styles.buttonsContainer}>
+                       <Button variant="contained" color="primary" onClick={() => router.back()}>
+                           return
+                       </Button>
+                       <Button variant="contained" color="secondary" onClick={() => download()}>
+                           Download
+                       </Button>
+                       <Button variant="contained" color="default" onClick={() => update()}>
+                           Update
+                       </Button>
+                   </div>
+                   <FileItem updateCode={set_originalCode} minifiedCode={minifiedCode} originalCode={originalCode} originalTitle={originalTitle} minifiedTitle={minifiedTitle}/>
                </div>
 
         </div>

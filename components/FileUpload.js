@@ -43,6 +43,7 @@ const UploadFiles = () => {
                         }
                     }
                     if (xhr.readyState == 4 && xhr.status==200) {
+                        toast.remove();
                         let token = JSON.parse(xhr.responseText).token;
                         Router.push('/posts/' + token);
                     }

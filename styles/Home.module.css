@@ -145,3 +145,11 @@
   text-decoration: underline;
 
 }
+
+.buttonsContainer{
+  display: flex;
+  flex-direction: row;
+}
+.buttonsContainer button {
+  margin: 5px;
+}

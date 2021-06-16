@@ -63,6 +63,7 @@ export default function Home() {
             <BottomNavigationAction label="Upload" icon={<RestoreIcon />} onClick={()=> router.push("/")}/>
             <BottomNavigationAction label="Archives" icon={<FavoriteIcon />} onClick={()=> router.push("/archives")}/>
         </BottomNavigation>
+        <div className="title">SHRINK IT</div>
       <main className={styles.fileBoxContainer}>
         <React.Fragment>
           <CssBaseline />
