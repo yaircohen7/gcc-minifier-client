@@ -20,10 +20,8 @@ const styles = {
 }
 
 const CodeEditor = (props) => {
-    console.log('CodeEditor',props);
     const [code, setCode] = useState("");
     useEffect(() => {
-        console.log('CodeEditor',props);
         setCode(props.code);
     },[props.code]);
     return (

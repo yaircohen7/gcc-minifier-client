@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router'
 import FileItem from "../../components/FileItem";
-import Link from 'next/link';
 import styles from "../../styles/Home.module.css";
 import Head from "next/head";
 import React, {useEffect,  useState} from "react";
@@ -11,7 +10,7 @@ import Button from '@material-ui/core/Button';
 const Post = () => {
     const router = useRouter();
     const query = useQuery();
-    console.log('router.query',router.query);
+
     const [token,setToken] = useState( router.query.token);
     const [originalCode,set_originalCode] = useState( "");
     const [minifiedCode,set_minifiedCode] = useState( "");
@@ -19,7 +18,7 @@ const Post = () => {
     const [minifiedTitle,set_minifiedTitle] = useState( "");
 
     useEffect(() => {
-        console.log('token',token);
+
         if(!token){
             setToken(router.query.token);
             return;
@@ -31,7 +30,6 @@ const Post = () => {
         };
         http(axiosObject)
             .then(response => {
-                console.log('response',response);
                 try{
                     set_originalCode(response.data.content.files[0].content);
                     set_minifiedCode(response.data.content.files[1].content);
@@ -63,7 +61,7 @@ const Post = () => {
         });
     };
     const update = () => {
-        console.log('org',originalCode);
+
         const formData = new FormData();
         const file = new File([originalCode], originalTitle, {
             type: 'application/javascript',
@@ -76,7 +74,7 @@ const Post = () => {
         };
         http(axiosObject)
             .then(response => {
-                console.log('response',response);
+
                 try{
                     set_originalCode(response.data.content.files[0].content);
                     set_minifiedCode(response.data.content.files[1].content);

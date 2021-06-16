@@ -22,7 +22,6 @@ const UploadFiles = () => {
 
 
     const selectFile = (event) => {
-        console.log('selectFile',event.target.files);
         setSelectedFiles(event.target.files);
     };
     const getUploadParams = ({ file, meta }) => {
@@ -31,7 +30,6 @@ const UploadFiles = () => {
         return { url: 'http://localhost:3030/upload', body }
     }
     const handleChangeStatus = ({meta, remove, xhr}, status) => {
-        console.log('handleChangeStatus', status, xhr);
         switch (status) {
             case 'uploading' :
                 xhr.onreadystatechange = function () {

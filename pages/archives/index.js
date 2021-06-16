@@ -45,7 +45,6 @@ export default function Archives() {
         };
         http(axiosObject)
             .then(response => {
-                console.log(response.data);
                 setFiles(response.data.response);
             })
             .catch(error => {
