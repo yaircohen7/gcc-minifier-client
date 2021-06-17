@@ -5,14 +5,17 @@ import 'react-dropzone-uploader/dist/styles.css'
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { toast, ToastContainer } from 'react-nextjs-toast';
 import Container from "@material-ui/core/Container";
+import Loader from "../components/Loader";
 
 const UploadFiles = () => {
 
     const [selectedFiles, setSelectedFiles] = useState(undefined);
     const [errorMsg,set_errorMsg] = useState(false);
+    const [loader,setLoader] = useState(false);
 
     const selectFile = (event) => {
         setSelectedFiles(event.target.files);
+        setLoader(true);
     };
     const getUploadParams = ({ file, meta }) => {
         const body = new FormData()
@@ -29,11 +32,13 @@ const UploadFiles = () => {
                         } catch (e) {
                             console.log(e);
                         }
+                        setLoader(false);
                     }
                     if (xhr.readyState == 4 && xhr.status==200) {
                         toast.remove();
                         let token = JSON.parse(xhr.responseText).token;
                         Router.push('/posts/' + token);
+                        setLoader(false);
                     }
                 };
                 break;
@@ -49,6 +54,7 @@ const UploadFiles = () => {
     return (
         <Container maxWidth={"xl"}>
             <React.Fragment>
+                {loader ? <Loader/> : ""}
                 <Dropzone
                     getUploadParams={getUploadParams}
                     onChangeStatus={handleChangeStatus}

@@ -6,7 +6,8 @@ import React, {useEffect,  useState} from "react";
 import http from "../../api/client";
 import useQuery from "../../services/useQuery";
 import Button from '@material-ui/core/Button';
-
+import Loader from "../../components/Loader";
+import {Alert, AlertTitle} from "@material-ui/lab";
 const Post = () => {
     const router = useRouter();
     const query = useQuery();
@@ -16,6 +17,9 @@ const Post = () => {
     const [minifiedCode,set_minifiedCode] = useState( "");
     const [originalTitle,set_originalTitle] = useState( "");
     const [minifiedTitle,set_minifiedTitle] = useState( "");
+    const [errorMsg,set_errorMsg] = useState(false);
+    const [loader,setLoader] = useState(false);
+
 
     useEffect(() => {
 
@@ -23,7 +27,7 @@ const Post = () => {
             setToken(router.query.token);
             return;
         }
-
+        setLoader(true);
         const axiosObject = {
             url: `/${token}`,
             method: "GET"
@@ -38,10 +42,11 @@ const Post = () => {
                 }catch (e){
 
                 }
+                setLoader(false);
             })
             .catch(error => {
                 console.log(error.response);
-
+                setLoader(false);
             });
 
 
@@ -72,6 +77,7 @@ const Post = () => {
             method: "PUT",
             data:formData
         };
+        setLoader(true);
         http(axiosObject)
             .then(response => {
 
@@ -80,13 +86,15 @@ const Post = () => {
                     set_minifiedCode(response.data.content.files[1].content);
                     set_originalTitle(response.data.content.files[0].name);
                     set_minifiedTitle(response.data.content.files[1].name);
+                    setLoader(false);
                 }catch (e){
 
                 }
             })
             .catch(error => {
-                console.log(error.response);
-
+                console.log(error.response.response);
+                set_errorMsg(error.response.data.response);
+                setLoader(false);
             });
     };
     return (
@@ -109,8 +117,12 @@ const Post = () => {
                            Update
                        </Button>
                    </div>
+                   <div className={styles.buttonsContainer} style={{justifyContent:'center'}}>
+                       {errorMsg ? <Alert severity="error" style={{position:"absolute",zIndex:50,width:'80%'}} onClose={() => {set_errorMsg(false)}}><AlertTitle>We're sorry but your file isn't legit..</AlertTitle>{errorMsg}</Alert> : ''}
+                   </div>
                    <FileItem updateCode={set_originalCode} minifiedCode={minifiedCode} originalCode={originalCode} originalTitle={originalTitle} minifiedTitle={minifiedTitle}/>
                </div>
+            {loader ? <Loader/> : ""}
 
         </div>
     );

@@ -41,7 +41,7 @@ export default function Home() {
    const router = useRouter();
   const classes = useStyles();
 
-    const [value, setValue] = React.useState(0);
+    const [loader, setLoader] = React.useState(false);
  // const styles = {  width: 600, color: 'black', padding: 20, margin:'0 auto' };
 
 
